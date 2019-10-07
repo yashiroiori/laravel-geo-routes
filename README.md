@@ -149,6 +149,16 @@ Route::get('/blog', 'FooController@baz')
 ```
 > ***Notice*** that we have added the **`or`** prefix and converted the callback name to studly case (e.g. `myCallback` was converted to `orMyCallback`), be sure not to forget this note as it is very important for your callback to work.
 
+## Convenience methods 
+Below is a list of convenience methods that allows you to easily access the *GeoRoute* data.
+
+| Signature | Returns | Description |
+|-----------|---------|-------------|
+|`getGeoConstraint()` | `array|null` | Retrieves the geo-constraint array.
+| `getConstraintCountries()` | `array|null` | Retrieves the geo-constraint countries.
+| `getGeoCallback()` | `array|null` | Retrieves the geo-constraint callback array.
+| `isAccessibleFrom(string $country)` | `boolean` | Determines if access is allowed from the given country.
+
 ## Contribution
 All contributions are welcomed for this project, please refer to the [CONTRIBUTING.md][2] file for more information about contribution guidelines.
 
