@@ -5,6 +5,7 @@ namespace LaraCrafts\GeoRoutes;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Routing\Route;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use LaraCrafts\GeoRoutes\Http\Middleware\GeoMiddleware;
 use LaraCrafts\GeoRoutes\Http\Middleware\GeoRoutesMiddleware;
 
@@ -72,6 +73,25 @@ class GeoRoutesServiceProvider extends ServiceProvider
 
         Route::macro('from', function (string ...$countries) {
             return new GeoRoute($this, $countries, 'allow');
+        });
+
+        Route::macro('getGeoConstraint', function () {
+            return $this->getAction('geo');
+        });
+
+        Route::macro('getConstraintCountries', function () {
+            return $this->getAction('geo')['countries'] ?? null;
+        });
+
+        Route::macro('getGeoCallback', function () {
+            return $this->getAction('geo')['callback'] ?? null;
+        });
+
+        Route::macro('isAccessibleFrom', function (string $country) {
+            $action = $this->getAction('geo');
+
+            return (($action['strategy'] ?? null) == 'allow')
+                && (!is_null($country) && in_array(Str::upper($country), $action['countries']));
         });
     }
 }
