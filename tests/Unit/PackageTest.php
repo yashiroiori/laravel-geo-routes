@@ -46,7 +46,7 @@ class PackageTest extends TestCase
         $expected = [
             'strategy' => 'allow',
             'countries' => ['CZ'],
-            'callback' => null
+            'callback' => null,
         ];
 
         $this->assertEquals($expected, $constraint);
